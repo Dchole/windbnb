@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import Header from "./components/Header";
+import Listing from "./components/Listing";
+import FilterSheet from "./components/FilterSheet";
+import FilterContextProvider from "./components/context/FilterContext";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <FilterContextProvider>
+    <Header />
+    <Listing />
+    <FilterSheet />
+    <footer>Derek Oware @ DevChallenges.io</footer>
+  </FilterContextProvider>
+);
 
 export default App;

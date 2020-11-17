@@ -1,0 +1,16 @@
+$primary-font: "Montserrat", sans-serif;
+$secondary-font: "Mulish", sans-serif;
+
+$icon-color: #eb5757;
+
+$breakpoints: (
+  "xs": 0px,
+  "sm": 600px,
+  "md": 960px,
+  "lg": 1280px,
+  "xl": 1920px
+);
+
+@function breakpoint($breakpoint) {
+  @return map-get($breakpoints, $breakpoint);
+}
