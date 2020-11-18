@@ -4,7 +4,7 @@ const breakpoints = { xs: 0, sm: 600, md: 960, lg: 1280, xl: 1920 };
 
 const useMediaQuery = breakpoint => {
   const [media, setMedia] = useState(false);
-  const [viewportWidth, setViewportWidth] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   const handleResize = useCallback(
     () => setViewportWidth(window.innerWidth),
