@@ -20,10 +20,7 @@ const FilterContextProvider = ({ children }) => {
           (stay.city.toLowerCase().includes(value.toLowerCase()) ||
             value.toLowerCase().includes(stay.city.toLowerCase()))
       )
-      .map(stay => {
-        console.log(stay);
-        return `${stay.city}, ${stay.country}`;
-      });
+      .map(stay => `${stay.city}, ${stay.country}`);
 
     setAutoComplete([...new Set(city_country)]);
   };
