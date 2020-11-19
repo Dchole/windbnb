@@ -1,27 +1,26 @@
 @import "./variables";
 
-#backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: #00000000;
-  z-index: 100;
-  animation: backdrop 200ms ease-out forwards;
-}
-
 #drawer {
   position: fixed;
   width: 100%;
   top: 0;
   left: 0;
-  padding: 90px 96px;
+  padding: 90px 8%;
   background-color: white;
   z-index: 1000;
   transform: translateY(-100%);
   transition: ease-out 240ms;
   animation: slide-in 240ms ease-in-out forwards;
+
+  @media (max-width: breakpoint("sm")) {
+    padding: 15px 24px;
+  }
+
+  p {
+    font-family: $secondary-font;
+    font-weight: 700;
+    font-size: 12px;
+  }
 
   form {
     display: flex;
@@ -30,11 +29,44 @@
     border-radius: 16px;
     margin-bottom: 32px;
 
+    @media (max-width: breakpoint("sm")) {
+      display: block;
+      border-radius: 16px;
+
+      #location {
+        position: relative;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 16px;
+        border-bottom: 2px solid #f2f2f2;
+
+        & input {
+          border-bottom-left-radius: 0 !important;
+          border-top-right-radius: 16px;
+        }
+      }
+
+      #guests {
+        border-left: initial !important;
+        border-bottom-right-radius: 16px !important;
+        border-bottom-left-radius: 16px !important;
+
+        &:focus-within {
+          border-left: 2px solid #56ebeb !important;
+        }
+
+        & input {
+          border-bottom-right-radius: 16px !important;
+          border-bottom-left-radius: 16px !important;
+        }
+      }
+    }
+
     & > * {
       flex-grow: 1;
     }
 
-    #location {
+    #location,
+    #guests {
       border-top-left-radius: 16px;
       border-bottom-left-radius: 16px;
       position: relative;
@@ -81,7 +113,6 @@
     }
 
     #guests {
-      @extend #location;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-left: 2px solid #f2f2f2;
@@ -93,20 +124,29 @@
     }
 
     button {
-      flex-grow: 0.5;
-      background-color: $accent-color;
-      padding: 8px 0;
-      box-sizing: content-box;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
-      transition: ease-out 120ms;
-
-      &:disabled {
-        background-color: #dfdfdf;
-      }
+      padding: 8px 0;
     }
+  }
+
+  button {
+    flex-grow: 0.5;
+    background-color: $accent-color;
+    padding: 8px 22px;
+    box-sizing: content-box;
+    border-radius: 16px;
+    transition: ease-out 120ms;
+
+    &:disabled {
+      background-color: #dfdfdf;
+    }
+  }
+
+  #button-wrapper {
+    margin-top: 50px;
+    display: grid;
+    place-items: center;
   }
 
   #filter-autocomplete {

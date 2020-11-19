@@ -10,7 +10,7 @@ const Listing = () => {
     <main>
       <div id="heading">
         <h1>Stays in Finland</h1>
-        <span>12+ stays</span>
+        <span>{stays.length}+ stays</span>
       </div>
       <section>
         {stays.map(stay => (

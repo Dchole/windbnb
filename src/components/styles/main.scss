@@ -1,8 +1,6 @@
 @import "./variables";
 
 main {
-  margin: auto 95px;
-
   #heading {
     display: flex;
     justify-content: space-between;
@@ -10,6 +8,11 @@ main {
 
     h1 {
       font-family: $secondary-font;
+      color: #333;
+
+      @media (max-width: breakpoint(sm)) {
+        font-size: 18px;
+      }
     }
 
     span {
@@ -29,12 +32,20 @@ main {
       grid-template-columns: repeat(2, 1fr);
     }
 
+    @media (max-width: breakpoint("sm")) {
+      grid-template-columns: 1fr;
+    }
+
     .property-card {
       img {
         width: 100%;
         height: 267px;
         border-radius: 24px;
         margin-bottom: 22px;
+
+        @media (max-width: breakpoint("sm")) {
+          height: 230px;
+        }
       }
 
       .super-host {

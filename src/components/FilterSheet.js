@@ -12,8 +12,9 @@ import List, {
 import Button from "@material/react-button";
 import FloatingLabel from "@material/react-floating-label";
 import Icon from "./Icon";
-import { FilterContext } from "./context/FilterContext";
 import useClickAwayListener from "../hooks/useClickAwayListener";
+import useMediaQuery from "../hooks/useMediaQuery";
+import { FilterContext } from "./context/FilterContext";
 
 const FilterSheet = () => {
   const {
@@ -27,6 +28,7 @@ const FilterSheet = () => {
   const [float, setFloat] = useState(false);
   const [city, setCity] = useState(filter);
   const clickedAway = useClickAwayListener();
+  const mobile = useMediaQuery("sm");
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -39,7 +41,8 @@ const FilterSheet = () => {
 
   const handleListItemClick = value => () => handleFilterByCity(value);
   const handleFieldFocus = () => setFloat(true);
-  const handleFieldBlur = event => !event.target.value && setFloat(false);
+  const handleFieldBlur = () => !city && setFloat(false);
+
   const handleCityInput = event => {
     setCity(event.target.value);
     handleAutoComplete(event.target.value);
@@ -49,6 +52,7 @@ const FilterSheet = () => {
     <>
       <div id="backdrop" />
       <section id="drawer">
+        {mobile && <p>Edit your search</p>}
         <form onSubmit={handleSubmit} id="filter-input">
           <div id="location">
             <FloatingLabel htmlFor="location--fields" float={float}>
@@ -76,24 +80,33 @@ const FilterSheet = () => {
               placeholder="Add guests"
             />
           </div>
-          <Button type="submit" icon={<Icon icon="search" />} unelevated>
-            Search
-          </Button>
+          {!mobile && (
+            <Button type="submit" icon={<Icon icon="search" />} unelevated>
+              Search
+            </Button>
+          )}
         </form>
         <section id="filter-autocomplete">
           <List>
             {autoComplete.map(location => (
-              <ListItem
-                key={location}
-                data-location={location}
-                onClick={handleListItemClick(location)}
-              >
+              <ListItem key={location} onClick={handleListItemClick(location)}>
                 <ListItemGraphic graphic={<Icon icon="location_on" />} />
                 <ListItemText primaryText={location} />
               </ListItem>
             ))}
           </List>
         </section>
+        {mobile && (
+          <div id="button-wrapper">
+            <Button
+              icon={<Icon icon="search" />}
+              onClick={handleSubmit}
+              unelevated
+            >
+              Search
+            </Button>
+          </div>
+        )}
       </section>
     </>
   );

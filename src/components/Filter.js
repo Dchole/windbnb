@@ -7,11 +7,11 @@ const Filter = () => {
   return (
     <div id="filter" onClick={enterSearchMode}>
       {filter ? (
-        <span>{filter}</span>
+        <div>{filter}</div>
       ) : (
-        <span style={{ color: "#bdbdbd" }}>LOCATION</span>
+        <div style={{ color: "#bdbdbd" }}>LOCATION</div>
       )}
-      <span>Add guests</span>
+      <div>Add guests</div>
       <button onClick={enterSearchMode}>
         <span className="material-icons">search</span>
       </button>

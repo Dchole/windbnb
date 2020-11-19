@@ -1,10 +1,11 @@
 import "./App.scss";
+import { lazy, Suspense, useContext } from "react";
 import Header from "./components/Header";
 import Listing from "./components/Listing";
-import FilterSheet from "./components/FilterSheet";
-import FilterDrawer from "./components/FilterDrawer";
-import { useContext } from "react";
 import { FilterContext } from "./components/context/FilterContext";
+
+const FilterDrawer = lazy(() => import("./components/FilterDrawer"));
+const FilterSheet = lazy(() => import("./components/FilterSheet"));
 
 const App = () => {
   const { searchMode } = useContext(FilterContext);
@@ -14,9 +15,11 @@ const App = () => {
       <Header />
       <Listing />
       {searchMode && (
-        <FilterDrawer>
-          <FilterSheet />
-        </FilterDrawer>
+        <Suspense fallback={<div id="backdrop" />}>
+          <FilterDrawer>
+            <FilterSheet />
+          </FilterDrawer>
+        </Suspense>
       )}
       <footer>Derek Oware @ DevChallenges.io</footer>
     </>
