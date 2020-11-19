@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { FilterContext } from "./context/FilterContext";
 
 const Filter = () => {
-  const { handleToggleSearchMode } = useContext(FilterContext);
+  const { enterSearchMode } = useContext(FilterContext);
 
   return (
-    <div id="filter" onClick={handleToggleSearchMode}>
+    <div id="filter" onClick={enterSearchMode}>
       <span>Helsinki, Finland</span>
       <span>Add guests</span>
-      <button onClick={handleToggleSearchMode}>
+      <button onClick={enterSearchMode}>
         <span className="material-icons">search</span>
       </button>
     </div>

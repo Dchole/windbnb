@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import FilterContextProvider from "./components/context/FilterContext";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FilterContextProvider>
+      <App />
+    </FilterContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

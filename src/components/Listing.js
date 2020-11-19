@@ -1,8 +1,11 @@
 import "./styles/main.scss";
-import stays from "../stays.json";
 import PropertyCard from "./PropertyCard";
+import { useContext } from "react";
+import { FilterContext } from "./context/FilterContext";
 
 const Listing = () => {
+  const { stays } = useContext(FilterContext);
+
   return (
     <main>
       <div id="heading">
