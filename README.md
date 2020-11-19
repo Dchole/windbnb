@@ -10,7 +10,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github.com/Dchole/windbnb">
       Solution
     </a>
     <span> | </span>
@@ -36,20 +36,13 @@
 
 ![screenshot](./public/screenshot.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
-
-- Where can I see your demo?
-- What was your experience?
-- What have you learned/improved?
-- Your wisdom? :)
-
 ### Built With
 
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
 - [React](https://reactjs.org/)
-- [MDC/react](https://vuejs.org/)
-- [Sass](https://tailwindcss.com/)
+- [MDC/react](https://github.com/material-components/material-components-web-react)
+- [Sass](https://sass-lang.com/)
 
 ## Features
 
@@ -65,7 +58,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/dchole/windbnb
 
 # Install dependencies
 $ npm install
