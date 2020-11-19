@@ -2,11 +2,15 @@ import { useContext } from "react";
 import { FilterContext } from "./context/FilterContext";
 
 const Filter = () => {
-  const { enterSearchMode } = useContext(FilterContext);
+  const { filter, enterSearchMode } = useContext(FilterContext);
 
   return (
     <div id="filter" onClick={enterSearchMode}>
-      <span>Helsinki, Finland</span>
+      {filter ? (
+        <span>{filter}</span>
+      ) : (
+        <span style={{ color: "#bdbdbd" }}>LOCATION</span>
+      )}
       <span>Add guests</span>
       <button onClick={enterSearchMode}>
         <span className="material-icons">search</span>

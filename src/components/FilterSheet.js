@@ -3,7 +3,7 @@ import "@material/react-button/dist/button.css";
 import "@material/react-list/dist/list.css";
 import "./styles/filter-sheet.scss";
 
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import List, {
   ListItem,
   ListItemText,
@@ -13,10 +13,12 @@ import Button from "@material/react-button";
 import FloatingLabel from "@material/react-floating-label";
 import Icon from "./Icon";
 import { FilterContext } from "./context/FilterContext";
+import useClickAwayListener from "../hooks/useClickAwayListener";
 
 const FilterSheet = () => {
   const [float, setFloat] = useState(false);
   const [city, setCity] = useState("");
+  const clickedAway = useClickAwayListener();
 
   const {
     autoComplete,
@@ -27,27 +29,21 @@ const FilterSheet = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(city);
     handleFilterByCity(city);
   };
 
+  useEffect(() => {
+    console.log(clickedAway);
+    if (clickedAway) exitSearchMode();
+  }, [exitSearchMode, clickedAway]);
+
+  const handleListItemClick = value => () => handleFilterByCity(value);
   const handleFieldFocus = () => setFloat(true);
   const handleFieldBlur = event => !event.target.value && setFloat(false);
   const handleCityInput = event => {
     setCity(event.target.value);
     handleAutoComplete(event.target.value);
   };
-
-  const handleClickAway = useCallback(
-    event => event.target.id === "backdrop" && exitSearchMode(),
-    [exitSearchMode]
-  );
-
-  useEffect(() => {
-    window.addEventListener("click", handleClickAway);
-
-    return () => window.removeEventListener("click", handleClickAway);
-  }, [handleClickAway]);
 
   return (
     <>
@@ -89,10 +85,14 @@ const FilterSheet = () => {
             Search
           </Button>
         </form>
-        <section id="filter-result">
+        <section id="filter-autocomplete">
           <List>
             {autoComplete.map(location => (
-              <ListItem key={location}>
+              <ListItem
+                key={location}
+                data-location={location}
+                onClick={handleListItemClick(location)}
+              >
                 <ListItemGraphic graphic={<Icon icon="location_on" />} />
                 <ListItemText primaryText={location} />
               </ListItem>
