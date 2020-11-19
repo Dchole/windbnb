@@ -14,7 +14,7 @@ const FilterContextProvider = ({ children }) => {
   const exitSearchMode = () => setSearchMode(false);
 
   const handleAutoComplete = value => {
-    const city_country = stays
+    const city_country = initialState
       .filter(
         stay =>
           value &&
@@ -27,7 +27,10 @@ const FilterContextProvider = ({ children }) => {
   };
 
   const handleFilterByCity = city => {
-    dispatch({ type: "FILTER_BY_CITY", payload: city });
+    city
+      ? dispatch({ type: "FILTER_BY_CITY", payload: city })
+      : dispatch({ type: "" });
+
     setFilter(city);
     exitSearchMode();
   };

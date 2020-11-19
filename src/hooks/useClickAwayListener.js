@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useClickAwayListener = () => {
   const [clickedAway, setClickedAway] = useState(false);
 
-  const handleClickAway = useCallback(event => {
+  const handleClickAway = event => {
     if (event.target.id === "backdrop") setClickedAway(true);
-  }, []);
+  };
 
   const handleEscPress = event => {
     if (event.key === "Escape") setClickedAway(true);
@@ -19,7 +19,7 @@ const useClickAwayListener = () => {
       window.removeEventListener("click", handleClickAway);
       window.removeEventListener("keydown", handleEscPress);
     };
-  }, [handleClickAway]);
+  }, []);
 
   return clickedAway;
 };

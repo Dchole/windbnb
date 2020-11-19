@@ -16,16 +16,17 @@ import { FilterContext } from "./context/FilterContext";
 import useClickAwayListener from "../hooks/useClickAwayListener";
 
 const FilterSheet = () => {
-  const [float, setFloat] = useState(false);
-  const [city, setCity] = useState("");
-  const clickedAway = useClickAwayListener();
-
   const {
+    filter,
     autoComplete,
     exitSearchMode,
     handleAutoComplete,
     handleFilterByCity
   } = useContext(FilterContext);
+
+  const [float, setFloat] = useState(false);
+  const [city, setCity] = useState(filter);
+  const clickedAway = useClickAwayListener();
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,7 +34,6 @@ const FilterSheet = () => {
   };
 
   useEffect(() => {
-    console.log(clickedAway);
     if (clickedAway) exitSearchMode();
   }, [exitSearchMode, clickedAway]);
 
@@ -76,12 +76,7 @@ const FilterSheet = () => {
               placeholder="Add guests"
             />
           </div>
-          <Button
-            type="submit"
-            icon={<Icon icon="search" />}
-            disabled={!Boolean(city)}
-            unelevated
-          >
+          <Button type="submit" icon={<Icon icon="search" />} unelevated>
             Search
           </Button>
         </form>
