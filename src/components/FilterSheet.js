@@ -18,12 +18,17 @@ const FilterSheet = () => {
   const [float, setFloat] = useState(false);
   const [city, setCity] = useState("");
 
-  const { autoComplete, exitSearchMode, handleAutoComplete } = useContext(
-    FilterContext
-  );
+  const {
+    autoComplete,
+    exitSearchMode,
+    handleAutoComplete,
+    handleFilterByCity
+  } = useContext(FilterContext);
 
-  const filter = event => {
+  const handleSubmit = event => {
     event.preventDefault();
+    console.log(city);
+    handleFilterByCity(city);
   };
 
   const handleFieldFocus = () => setFloat(true);
@@ -48,7 +53,7 @@ const FilterSheet = () => {
     <>
       <div id="backdrop" />
       <section id="drawer">
-        <form onSubmit={filter} id="filter-input">
+        <form onSubmit={handleSubmit} id="filter-input">
           <div id="location">
             <FloatingLabel htmlFor="location--fields" float={float}>
               Location
@@ -75,7 +80,12 @@ const FilterSheet = () => {
               placeholder="Add guests"
             />
           </div>
-          <Button type="submit" icon={<Icon icon="search" />} unelevated>
+          <Button
+            type="submit"
+            icon={<Icon icon="search" />}
+            disabled={!Boolean(city)}
+            unelevated
+          >
             Search
           </Button>
         </form>
