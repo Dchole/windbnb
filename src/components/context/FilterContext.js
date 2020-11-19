@@ -8,7 +8,6 @@ const FilterContextProvider = ({ children }) => {
   const [stays, dispatch] = useReducer(staysReducer, initialState);
   const [searchMode, setSearchMode] = useState(false);
   const [autoComplete, setAutoComplete] = useState([]);
-  const [filter, setFilter] = useState("");
 
   const enterSearchMode = () => setSearchMode(true);
   const exitSearchMode = () => setSearchMode(false);
@@ -31,7 +30,6 @@ const FilterContextProvider = ({ children }) => {
       ? dispatch({ type: "FILTER_BY_CITY", payload: city })
       : dispatch({ type: "" });
 
-    setFilter(city);
     exitSearchMode();
   };
 
@@ -42,7 +40,6 @@ const FilterContextProvider = ({ children }) => {
     <FilterContext.Provider
       value={{
         stays,
-        filter,
         searchMode,
         autoComplete,
         enterSearchMode,

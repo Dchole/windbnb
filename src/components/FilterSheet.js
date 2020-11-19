@@ -3,7 +3,7 @@ import "@material/react-button/dist/button.css";
 import "@material/react-list/dist/list.css";
 import "./styles/filter-sheet.scss";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import List, {
   ListItem,
   ListItemText,
@@ -18,26 +18,32 @@ import { FilterContext } from "./context/FilterContext";
 
 const FilterSheet = () => {
   const {
-    filter,
     autoComplete,
     exitSearchMode,
     handleAutoComplete,
-    handleFilterByCity
+    handleFilterByCity,
+    handleFilterByGuestsNumber
   } = useContext(FilterContext);
 
+  const ref = useRef();
+
   const [float, setFloat] = useState(false);
-  const [city, setCity] = useState(filter);
+  const [city, setCity] = useState("");
+  const [maxGuests, setMaxGuests] = useState(0);
   const clickedAway = useClickAwayListener();
   const mobile = useMediaQuery("sm");
 
   const handleSubmit = event => {
     event.preventDefault();
     handleFilterByCity(city);
+    handleFilterByGuestsNumber(maxGuests);
   };
 
   useEffect(() => {
     if (clickedAway) exitSearchMode();
   }, [exitSearchMode, clickedAway]);
+
+  useEffect(() => ref.current.focus(), []);
 
   const handleListItemClick = value => () => handleFilterByCity(value);
   const handleFieldFocus = () => setFloat(true);
@@ -47,6 +53,8 @@ const FilterSheet = () => {
     setCity(event.target.value);
     handleAutoComplete(event.target.value);
   };
+
+  const handleMaxGuestsInput = event => setMaxGuests(+event.target.value);
 
   return (
     <>
@@ -62,6 +70,7 @@ const FilterSheet = () => {
               id="location--fields"
               name="location"
               type="text"
+              ref={ref}
               value={city}
               onFocus={handleFieldFocus}
               onBlur={handleFieldBlur}
@@ -78,6 +87,7 @@ const FilterSheet = () => {
               name="guests"
               type="text"
               placeholder="Add guests"
+              onChange={handleMaxGuestsInput}
             />
           </div>
           {!mobile && (
