@@ -35,8 +35,7 @@ const FilterSheet = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    handleFilterByCity(city);
-    handleFilterByGuestsNumber(maxGuests);
+    city ? handleFilterByCity(city) : handleFilterByGuestsNumber(maxGuests);
   };
 
   useEffect(() => {
